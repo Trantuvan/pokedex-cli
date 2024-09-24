@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
 )
 
 const (
@@ -26,6 +27,23 @@ type Result struct {
 }
 
 func GetLocationAreasPaginated(url string) pokeDex {
+	caches := NewCache(time.Second)
+	locationAreas := &pokeDex{}
+
+	if location, ok := caches.Get(url); ok {
+		errUnmarshal := json.Unmarshal(location, locationAreas)
+
+		if errUnmarshal != nil {
+			log.Fatal(errUnmarshal)
+		}
+
+		for _, result := range locationAreas.Results {
+			fmt.Println(result.Name)
+		}
+
+		return *locationAreas
+	}
+
 	res, errGet := http.Get(url)
 
 	if errGet != nil {
@@ -45,7 +63,7 @@ func GetLocationAreasPaginated(url string) pokeDex {
 		log.Fatal(errRead)
 	}
 
-	locationAreas := &pokeDex{}
+	caches.Add(url, body)
 	errUnmarshal := json.Unmarshal(body, locationAreas)
 
 	if errUnmarshal != nil {
