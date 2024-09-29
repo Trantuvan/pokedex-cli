@@ -10,7 +10,7 @@ func commadMap(urls *config) error {
 	if len(urls.Next) == 0 {
 		urls.Next = fmt.Sprintf("%s%s", internal.BaseURL, internal.LocationArea)
 	}
-	locationAreas := internal.GetLocationAreasPaginated(urls.Next)
+	locationAreas := urls.httpClient.GetLocationAreasPaginated(urls.Next)
 	urls.Next = locationAreas.Next
 	urls.Prev = locationAreas.Previous
 	return nil

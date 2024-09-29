@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/trantuvan/pokedex-cli/internal"
 )
 
 type cliCommand struct {
@@ -14,12 +17,13 @@ type cliCommand struct {
 }
 
 type config struct {
-	Next string
-	Prev *string //* allow nil string
+	Prev       *string //* allow nil string
+	Next       string
+	httpClient internal.Client
 }
 
 func getCliCommands() map[string]cliCommand {
-	urls := &config{}
+	urls := &config{httpClient: internal.NewClient(5 * time.Second)}
 
 	return map[string]cliCommand{
 		"help": {

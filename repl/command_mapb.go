@@ -2,8 +2,6 @@ package repl
 
 import (
 	"errors"
-
-	"github.com/trantuvan/pokedex-cli/internal"
 )
 
 func CommandMapb(urls *config) error {
@@ -11,7 +9,7 @@ func CommandMapb(urls *config) error {
 		return errors.New("cannot go prev")
 	}
 
-	locationAreas := internal.GetLocationAreasPaginated(*urls.Prev)
+	locationAreas := urls.httpClient.GetLocationAreasPaginated(*urls.Prev)
 	urls.Next = locationAreas.Next
 	urls.Prev = locationAreas.Previous
 	return nil
