@@ -7,7 +7,7 @@ import (
 
 func CommandMapb(urls *config) error {
 	if urls.Prev == nil {
-		return errors.New("cannot go prev")
+		return errors.New("you're on the first page")
 	}
 
 	locationAreas := urls.httpClient.GetLocationAreasPaginated(*urls.Prev)
