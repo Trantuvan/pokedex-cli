@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"net/http"
 	"time"
 )
 
@@ -26,7 +25,7 @@ type Result struct {
 	URL  string
 }
 
-func GetLocationAreasPaginated(url string) pokeDex {
+func (c Client) GetLocationAreasPaginated(url string) pokeDex {
 	caches := NewCache(time.Second)
 	locationAreas := &pokeDex{}
 
@@ -44,7 +43,7 @@ func GetLocationAreasPaginated(url string) pokeDex {
 		return *locationAreas
 	}
 
-	res, errGet := http.Get(url)
+	res, errGet := c.httpClient.Get(url)
 
 	if errGet != nil {
 		log.Fatal(errGet)
