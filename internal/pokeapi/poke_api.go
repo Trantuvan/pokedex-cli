@@ -1,10 +1,9 @@
-package internal
+package pokeapi
 
 import (
 	"encoding/json"
 	"io"
 	"log"
-	"time"
 )
 
 const (
@@ -25,10 +24,9 @@ type Result struct {
 }
 
 func (c Client) GetLocationAreasPaginated(url string) pokeDex {
-	caches := NewCache(time.Second)
 	locationAreas := &pokeDex{}
 
-	if location, ok := caches.Get(url); ok {
+	if location, ok := c.cache.Get(url); ok {
 		errUnmarshal := json.Unmarshal(location, locationAreas)
 
 		if errUnmarshal != nil {
@@ -57,7 +55,7 @@ func (c Client) GetLocationAreasPaginated(url string) pokeDex {
 		log.Fatal(errRead)
 	}
 
-	caches.Add(url, body)
+	c.cache.Add(url, body)
 	errUnmarshal := json.Unmarshal(body, locationAreas)
 
 	if errUnmarshal != nil {
