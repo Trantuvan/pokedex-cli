@@ -2,7 +2,6 @@ package internal
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"time"
@@ -36,10 +35,6 @@ func (c Client) GetLocationAreasPaginated(url string) pokeDex {
 			log.Fatal(errUnmarshal)
 		}
 
-		for _, result := range locationAreas.Results {
-			fmt.Println(result.Name)
-		}
-
 		return *locationAreas
 	}
 
@@ -67,10 +62,6 @@ func (c Client) GetLocationAreasPaginated(url string) pokeDex {
 
 	if errUnmarshal != nil {
 		log.Fatal(errUnmarshal)
-	}
-
-	for _, result := range locationAreas.Results {
-		fmt.Println(result.Name)
 	}
 
 	return *locationAreas
