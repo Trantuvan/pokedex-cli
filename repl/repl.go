@@ -64,7 +64,7 @@ func Repl() {
 	commands := getCliCommands()
 
 	for {
-		fmt.Print("Pokedex >")
+		fmt.Print("Pokedex > ")
 
 		if !scanner.Scan() {
 			break
