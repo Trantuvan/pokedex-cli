@@ -13,7 +13,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(filter string) error
 }
 
 type config struct {
@@ -29,24 +29,28 @@ func getCliCommands() map[string]cliCommand {
 		"help": {
 			name:        "help",
 			description: "Displays a help message",
-			callback:    commandHelp,
+			callback: func(string) error {
+				return commandHelp()
+			},
 		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
-			callback:    commandExit,
+			callback: func(filter string) error {
+				return commandExit()
+			},
 		},
 		"map": {
 			name:        "map",
 			description: "displays the names of the next 20 location areas in the Pokemon world",
-			callback: func() error {
+			callback: func(string) error {
 				return commadMap(urls)
 			},
 		},
 		"mapb": {
 			name:        "mapb",
 			description: "displays the names of the previous 20 location areas in the Pokemon world",
-			callback: func() error {
+			callback: func(string) error {
 				return CommandMapb(urls)
 			},
 		},
