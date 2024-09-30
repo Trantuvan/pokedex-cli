@@ -8,23 +8,11 @@ import (
 
 const (
 	BaseURL      = "https://pokeapi.co/api/v2/"
-	LocationArea = "location-area"
+	LocationArea = "location-area/"
 )
 
-type pokeDex struct {
-	Count    int64
-	Next     string
-	Previous *string //* allow nil string
-	Results  []Result
-}
-
-type Result struct {
-	Name string
-	URL  string
-}
-
-func (c Client) GetLocationAreasPaginated(url string) pokeDex {
-	locationAreas := &pokeDex{}
+func (c Client) GetLocationAreasPaginated(url string) locationArea {
+	locationAreas := &locationArea{}
 
 	if location, ok := c.cache.Get(url); ok {
 		errUnmarshal := json.Unmarshal(location, locationAreas)
