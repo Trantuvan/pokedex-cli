@@ -54,6 +54,13 @@ func getCliCommands() map[string]cliCommand {
 				return CommandMapb(urls)
 			},
 		},
+		"explore": {
+			name:        "explore",
+			description: "displays the names of pokemons in this area",
+			callback: func(filter string) error {
+				return CommandExplore(urls, filter)
+			},
+		},
 	}
 }
 
@@ -81,7 +88,11 @@ func Repl() {
 		}
 
 		if command, exist := commands[words[0]]; exist {
-			err := command.callback()
+			filter := ""
+			if len(words) == 2 {
+				filter = words[1]
+			}
+			err := command.callback(filter)
 			if err != nil {
 				fmt.Println(err)
 			}
