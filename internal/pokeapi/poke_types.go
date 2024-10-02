@@ -27,3 +27,18 @@ type pokemon struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }
+
+type catchPokemon struct {
+	Id             int       `json:"id"`
+	BaseExperience float64   `json:"base_experience"`
+	Height         int       `json:"height"`
+	Weight         int       `json:"weight"`
+	Name           string    `json:"name"`
+	Species        Species   `json:"species"`
+	Forms          []Species `json:"forms"`
+}
+
+type Species struct {
+	Name string
+	Url  string
+}
