@@ -149,7 +149,7 @@ func (c Client) Catch(url string) *catchPokemon {
 
 func calcCatchPercentage(baseExperience float64) float64 {
 	percent := (1 - (baseExperience-minimumBaseExperince)/(maximumBaseExperience-minimumBaseExperince)) * 100
-	randomEffect := rand.Intn(100)
-	catchPercent := percent + float64(randomEffect)
+	randomEffect := rand.Float64()
+	catchPercent := percent + randomEffect
 	return math.Min(catchPercent, 100)
 }
