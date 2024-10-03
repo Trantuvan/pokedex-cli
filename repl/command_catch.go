@@ -20,6 +20,7 @@ func CommandCatch(url *config, filters ...string) error {
 	} else {
 		url.caughtPokemons[pokemon.Name] = *pokemon
 		fmt.Printf("%s was caught!\n", filters[0])
+		fmt.Println("You may now inspect it with the inspect command.")
 	}
 
 	return nil

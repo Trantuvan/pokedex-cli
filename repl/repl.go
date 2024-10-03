@@ -76,6 +76,13 @@ func getCliCommands() map[string]cliCommand {
 				return CommandInspect(urls, filter...)
 			},
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "listing all pokemons caught",
+			callback: func(...string) error {
+				return CommandPokedex(urls)
+			},
+		},
 	}
 }
 
