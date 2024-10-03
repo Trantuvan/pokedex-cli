@@ -30,7 +30,7 @@ type pokemon struct {
 
 type CatchPokemon struct {
 	Id             int       `json:"id"`
-	BaseExperience float64   `json:"base_experience"`
+	BaseExperience int       `json:"base_experience"`
 	Height         int       `json:"height"`
 	Weight         int       `json:"weight"`
 	Name           string    `json:"name"`

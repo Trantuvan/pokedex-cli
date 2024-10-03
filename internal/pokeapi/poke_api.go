@@ -4,16 +4,13 @@ import (
 	"encoding/json"
 	"io"
 	"log"
-	"math"
 	"math/rand"
 )
 
 const (
-	BaseURL               = "https://pokeapi.co/api/v2/"
-	LocationArea          = "location-area/"
-	PokemonInfo           = "pokemon/"
-	maximumBaseExperience = 200
-	minimumBaseExperince  = 40
+	BaseURL      = "https://pokeapi.co/api/v2/"
+	LocationArea = "location-area/"
+	PokemonInfo  = "pokemon/"
 )
 
 func (c Client) GetLocationAreasPaginated(url string) locationArea {
@@ -137,16 +134,9 @@ func (c Client) Catch(url string) *CatchPokemon {
 		log.Fatal(errUnmarshal)
 	}
 
-	if percent := calcCatchPercentage(catch.BaseExperience); percent >= 68 {
+	if percent := rand.Intn(catch.BaseExperience); percent > 40 {
 		return catch
 	}
 
 	return nil
-}
-
-func calcCatchPercentage(baseExperience float64) float64 {
-	percent := (1 - (baseExperience-minimumBaseExperince)/(maximumBaseExperience-minimumBaseExperince)) * 100
-	randomEffect := rand.Float64()
-	catchPercent := percent + randomEffect
-	return math.Min(catchPercent, 100)
 }
