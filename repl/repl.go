@@ -69,6 +69,13 @@ func getCliCommands() map[string]cliCommand {
 				return CommandCatch(urls, filter...)
 			},
 		},
+		"inspect": {
+			name:        "inspect <pokemon_name>",
+			description: "inspect caught pokemon",
+			callback: func(filter ...string) error {
+				return CommandInspect(urls, filter...)
+			},
+		},
 	}
 }
 
