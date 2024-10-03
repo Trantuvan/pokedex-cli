@@ -11,11 +11,12 @@ import (
 const (
 	BaseURL               = "https://pokeapi.co/api/v2/"
 	LocationArea          = "location-area/"
-	maximumBaseExperience = 635
+	PokemonInfo           = "pokemon/"
+	maximumBaseExperience = 200
 	minimumBaseExperince  = 40
 )
 
-var Pokemons map[string]catchPokemon
+var catches userPokeDex = userPokeDex{}
 
 func (c Client) GetLocationAreasPaginated(url string) locationArea {
 	locationAreas := &locationArea{}
