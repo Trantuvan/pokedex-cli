@@ -42,3 +42,5 @@ type Species struct {
 	Name string
 	Url  string
 }
+
+type userPokeDex map[string]catchPokemon
