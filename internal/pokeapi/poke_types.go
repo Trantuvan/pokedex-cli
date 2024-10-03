@@ -28,7 +28,7 @@ type pokemon struct {
 	Url  string `json:"url"`
 }
 
-type catchPokemon struct {
+type CatchPokemon struct {
 	Id             int       `json:"id"`
 	BaseExperience float64   `json:"base_experience"`
 	Height         int       `json:"height"`
@@ -42,5 +42,3 @@ type Species struct {
 	Name string
 	Url  string
 }
-
-type userPokeDex map[string]catchPokemon

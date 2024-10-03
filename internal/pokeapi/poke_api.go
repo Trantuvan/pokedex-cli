@@ -16,8 +16,6 @@ const (
 	minimumBaseExperince  = 40
 )
 
-var catches userPokeDex = userPokeDex{}
-
 func (c Client) GetLocationAreasPaginated(url string) locationArea {
 	locationAreas := &locationArea{}
 
@@ -101,8 +99,8 @@ func (c Client) ExplorePokemonInArea(url string) pokemonInArea {
 	return *pokemonInArea
 }
 
-func (c Client) Catch(url string) *catchPokemon {
-	catch := &catchPokemon{}
+func (c Client) Catch(url string) *CatchPokemon {
+	catch := &CatchPokemon{}
 
 	if pokemons, ok := c.cache.Get(url); ok {
 		errUnmarshal := json.Unmarshal(pokemons, catch)
@@ -140,7 +138,6 @@ func (c Client) Catch(url string) *catchPokemon {
 	}
 
 	if percent := calcCatchPercentage(catch.BaseExperience); percent >= 68 {
-		catches[catch.Name] = *catch
 		return catch
 	}
 

@@ -18,6 +18,7 @@ func CommandCatch(url *config, filters ...string) error {
 	if pokemon := url.httpClient.Catch(catchUrl); pokemon == nil {
 		fmt.Printf("%s escaped!\n", filters[0])
 	} else {
+		url.caughtPokemons[pokemon.Name] = *pokemon
 		fmt.Printf("%s was caught!\n", filters[0])
 	}
 

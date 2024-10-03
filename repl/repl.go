@@ -17,13 +17,14 @@ type cliCommand struct {
 }
 
 type config struct {
-	Prev       *string //* allow nil string
-	Next       string
-	httpClient pokeapi.Client
+	Prev           *string //* allow nil string
+	Next           string
+	httpClient     pokeapi.Client
+	caughtPokemons map[string]pokeapi.CatchPokemon
 }
 
 func getCliCommands() map[string]cliCommand {
-	urls := &config{httpClient: pokeapi.NewClient(5*time.Second, 5*time.Minute)}
+	urls := &config{httpClient: pokeapi.NewClient(5*time.Second, 5*time.Minute), caughtPokemons: map[string]pokeapi.CatchPokemon{}}
 
 	return map[string]cliCommand{
 		"help": {
